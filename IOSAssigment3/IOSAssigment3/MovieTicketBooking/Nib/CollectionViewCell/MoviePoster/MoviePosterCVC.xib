@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MoviePosterCVC" customModule="MovieTicketBooking" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="211" height="366"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="211" height="366"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ITr-5h-qt9">
+                        <rect key="frame" x="0.0" y="0.0" width="211" height="281.33333333333331"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ITr-5h-qt9" secondAttribute="height" multiplier="3:4" id="TmN-8M-8Aj"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RE3-Ec-bct">
+                        <rect key="frame" x="0.0" y="286.33333333333331" width="211" height="20.333333333333314"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxi-i2-WWo">
+                        <rect key="frame" x="0.0" y="302" width="211" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="ITr-5h-qt9" firstAttribute="trailing" secondItem="ZTg-uK-7eu" secondAttribute="trailing" id="0ek-tw-k6U"/>
+                <constraint firstItem="RE3-Ec-bct" firstAttribute="leading" secondItem="ITr-5h-qt9" secondAttribute="leading" id="9r0-n2-zFC"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="leading" secondItem="ITr-5h-qt9" secondAttribute="leading" id="Bxe-nq-FBc"/>
+                <constraint firstItem="RE3-Ec-bct" firstAttribute="top" secondItem="ITr-5h-qt9" secondAttribute="bottom" constant="5" id="epo-cA-3yP"/>
+                <constraint firstItem="RE3-Ec-bct" firstAttribute="trailing" secondItem="ITr-5h-qt9" secondAttribute="trailing" id="fWq-ew-4Tv"/>
+                <constraint firstAttribute="top" secondItem="ITr-5h-qt9" secondAttribute="top" id="iX8-uN-uLn"/>
+            </constraints>
+            <size key="customSize" width="211" height="366"/>
+            <connections>
+                <outlet property="imageIV" destination="ITr-5h-qt9" id="bfn-bn-zFC"/>
+                <outlet property="screeningDatesLabel" destination="sxi-i2-WWo" id="jh1-oM-ics"/>
+                <outlet property="titleLabel" destination="RE3-Ec-bct" id="SxT-rL-1Uu"/>
+            </connections>
+            <point key="canvasLocation" x="164.12213740458014" y="131.69014084507043"/>
+        </collectionViewCell>
+    </objects>
+</document>
