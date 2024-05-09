@@ -11,13 +11,17 @@ final class TicketViewController: UIViewController {
   
   // MARK: - Outlets
   
-  @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak var congratsView: UIView!
+    @IBOutlet weak private var titleLabel: UILabel!
   @IBOutlet weak private var seatsLabel: UILabel!
   @IBOutlet weak private var dateLabel: UILabel!
   @IBOutlet weak private var timeLabel: UILabel!
   @IBOutlet weak private var priceLabel: UILabel!
-  
+    @IBOutlet weak var goHomeButton: UIButton!
+    
   // MARK: - Variables
+    
+    var isOnlyShowDetailTicket: Bool = false
   
   var ticket: Ticket?
   
@@ -26,6 +30,7 @@ final class TicketViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     fillTicket()
+      self.setUI()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -42,8 +47,17 @@ final class TicketViewController: UIViewController {
     dateLabel.text = ticket.session.date.toString()
     timeLabel.text = ticket.session.time
     priceLabel.text = String(ticket.price)
-    saveTicket(ticket: ticket)
+      if !self.isOnlyShowDetailTicket{
+          saveTicket(ticket: ticket)
+      }
   }
+    
+    func setUI(){
+        if isOnlyShowDetailTicket{
+            self.goHomeButton.setTitle("GO BACK", for: .normal)
+        }
+        self.congratsView.isHidden = isOnlyShowDetailTicket
+    }
   
   private func saveTicket(ticket: Ticket) {
     let userDefault = UserDefaults.standard
@@ -61,6 +75,10 @@ final class TicketViewController: UIViewController {
   // MARK: - Outlets
   
   @IBAction private func btnGoHome_TUI(_ sender: Any) {
-    navigationController?.popToRootViewController(animated: true)
+      if isOnlyShowDetailTicket{
+          self.navigationController?.popViewController(animated: true)
+      }else{
+          navigationController?.popToRootViewController(animated: true)
+      }
   }
 }

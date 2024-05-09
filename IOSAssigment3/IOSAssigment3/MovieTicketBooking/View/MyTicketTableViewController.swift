@@ -28,6 +28,11 @@ class MyTicketTableViewController: UITableViewController {
       tableView.reloadData()
     }
   }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
   
   // MARK: - Table view data source
   
@@ -51,5 +56,9 @@ class MyTicketTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+      let ticketVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TicketVC") as! TicketViewController
+      ticketVC.ticket = tickets[indexPath.row]
+      ticketVC.isOnlyShowDetailTicket = true
+      navigationController?.pushViewController(ticketVC, animated: true)
   }
 }

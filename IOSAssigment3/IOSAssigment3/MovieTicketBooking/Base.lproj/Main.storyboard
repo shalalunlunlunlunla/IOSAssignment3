@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMn-la-i0z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMn-la-i0z">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -19,14 +19,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="466-Jd-lV6">
-                                <rect key="frame" x="169.66666666666666" y="113.00000000000001" width="90.999999999999972" height="33.666666666666671"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Odz-Ul-YEx">
-                                <rect key="frame" x="0.0" y="205.66666666666663" width="430" height="354"/>
+                                <rect key="frame" x="0.0" y="123" width="430" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="D2u-yR-mcf"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rWU-Lm-W21">
                                     <size key="itemSize" width="255" height="341"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -39,8 +36,15 @@
                                     <outlet property="delegate" destination="NEJ-1b-pUZ" id="dR9-ki-XyU"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1f-cZ-eAz" customClass="MovieSlideHeader" customModule="MovieTicketBooking" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="333" width="430" height="46"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="u3r-R3-UsW"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JAU-6P-nvz">
-                                <rect key="frame" x="0.0" y="620.66666666666663" width="430" height="205.33333333333337"/>
+                                <rect key="frame" x="0.0" y="384" width="430" height="205"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oWL-Jn-6xw">
                                     <size key="itemSize" width="183" height="183"/>
@@ -54,42 +58,49 @@
                                     <outlet property="delegate" destination="NEJ-1b-pUZ" id="hGn-9q-uFc"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubH-2C-wOT" customClass="MovieSlideHeader" customModule="MovieTicketBooking" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="154.66666666666666" width="430" height="46"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfW-IC-o6c" customClass="MovieSlideHeader" customModule="MovieTicketBooking" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="589" width="430" height="46"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="qpF-lA-5D4"/>
+                                    <constraint firstAttribute="height" constant="46" id="UHW-OQ-xo4"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1f-cZ-eAz" customClass="MovieSlideHeader" customModule="MovieTicketBooking" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="569.66666666666663" width="430" height="46"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WvE-IF-2uy">
+                                <rect key="frame" x="0.0" y="635" width="430" height="205"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="u3r-R3-UsW"/>
-                                </constraints>
-                            </view>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rYT-x0-gr9">
+                                    <size key="itemSize" width="183" height="183"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="NEJ-1b-pUZ" id="fNn-QH-Qg9"/>
+                                    <outlet property="delegate" destination="NEJ-1b-pUZ" id="alV-QA-hl3"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jkq-Lf-IA5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Odz-Ul-YEx" firstAttribute="trailing" secondItem="ubH-2C-wOT" secondAttribute="trailing" id="042-IQ-x91"/>
-                            <constraint firstItem="Odz-Ul-YEx" firstAttribute="leading" secondItem="ubH-2C-wOT" secondAttribute="leading" id="2Mi-rE-xa5"/>
+                            <constraint firstItem="hfW-IC-o6c" firstAttribute="leading" secondItem="jkq-Lf-IA5" secondAttribute="leading" id="09s-L6-pne"/>
+                            <constraint firstItem="hfW-IC-o6c" firstAttribute="top" secondItem="JAU-6P-nvz" secondAttribute="bottom" id="7qZ-C3-vcy"/>
                             <constraint firstItem="h1f-cZ-eAz" firstAttribute="leading" secondItem="Odz-Ul-YEx" secondAttribute="leading" id="CuM-ZK-fg9"/>
-                            <constraint firstItem="jkq-Lf-IA5" firstAttribute="trailing" secondItem="ubH-2C-wOT" secondAttribute="trailing" id="D4C-Gb-4jl"/>
                             <constraint firstItem="JAU-6P-nvz" firstAttribute="leading" secondItem="Odz-Ul-YEx" secondAttribute="leading" id="Ldg-YC-JKr"/>
+                            <constraint firstItem="jkq-Lf-IA5" firstAttribute="trailing" secondItem="WvE-IF-2uy" secondAttribute="trailing" id="M4O-nZ-6s3"/>
                             <constraint firstItem="jkq-Lf-IA5" firstAttribute="trailing" secondItem="Odz-Ul-YEx" secondAttribute="trailing" id="OBJ-O7-gjF"/>
                             <constraint firstItem="JAU-6P-nvz" firstAttribute="top" secondItem="h1f-cZ-eAz" secondAttribute="bottom" constant="5" id="OFk-2U-Bik"/>
+                            <constraint firstItem="jkq-Lf-IA5" firstAttribute="trailing" secondItem="hfW-IC-o6c" secondAttribute="trailing" id="OWG-dE-ODz"/>
                             <constraint firstItem="JAU-6P-nvz" firstAttribute="height" secondItem="Zp7-zC-Mjw" secondAttribute="height" multiplier="0.22" id="Qtv-Bq-bDW"/>
-                            <constraint firstItem="Odz-Ul-YEx" firstAttribute="height" secondItem="Zp7-zC-Mjw" secondAttribute="height" multiplier="0.38" id="Sx3-55-Yvy"/>
-                            <constraint firstItem="ubH-2C-wOT" firstAttribute="top" secondItem="466-Jd-lV6" secondAttribute="bottom" constant="8" id="UaS-59-dBk"/>
-                            <constraint firstItem="ubH-2C-wOT" firstAttribute="leading" secondItem="jkq-Lf-IA5" secondAttribute="leading" id="XlG-g1-NWD"/>
                             <constraint firstItem="h1f-cZ-eAz" firstAttribute="trailing" secondItem="Odz-Ul-YEx" secondAttribute="trailing" id="YDx-l8-qPE"/>
-                            <constraint firstItem="Odz-Ul-YEx" firstAttribute="top" secondItem="ubH-2C-wOT" secondAttribute="bottom" constant="5" id="brK-hh-Pmt"/>
-                            <constraint firstItem="466-Jd-lV6" firstAttribute="centerX" secondItem="jkq-Lf-IA5" secondAttribute="centerX" id="jPt-RQ-odq"/>
+                            <constraint firstItem="WvE-IF-2uy" firstAttribute="height" secondItem="JAU-6P-nvz" secondAttribute="height" id="bQV-Ip-Gu6"/>
                             <constraint firstItem="h1f-cZ-eAz" firstAttribute="top" secondItem="Odz-Ul-YEx" secondAttribute="bottom" constant="10" id="ndR-pg-pL6"/>
                             <constraint firstItem="Odz-Ul-YEx" firstAttribute="leading" secondItem="jkq-Lf-IA5" secondAttribute="leading" id="o3c-gD-D9w"/>
+                            <constraint firstItem="WvE-IF-2uy" firstAttribute="top" secondItem="hfW-IC-o6c" secondAttribute="bottom" id="rjp-U9-3uX"/>
                             <constraint firstItem="JAU-6P-nvz" firstAttribute="trailing" secondItem="Odz-Ul-YEx" secondAttribute="trailing" id="sMW-Y6-ZAk"/>
-                            <constraint firstItem="466-Jd-lV6" firstAttribute="top" secondItem="jkq-Lf-IA5" secondAttribute="top" constant="10" id="sh0-Vc-7bh"/>
+                            <constraint firstItem="Odz-Ul-YEx" firstAttribute="top" secondItem="jkq-Lf-IA5" secondAttribute="top" constant="20" id="u7e-O7-bcG"/>
+                            <constraint firstItem="WvE-IF-2uy" firstAttribute="leading" secondItem="jkq-Lf-IA5" secondAttribute="leading" id="wH4-Ws-kpm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" style="browser" id="Puu-5Y-JHd">
@@ -102,7 +113,9 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="moviesCV" destination="Odz-Ul-YEx" id="lbM-IY-gGV"/>
-                        <outlet property="moviesHeader" destination="ubH-2C-wOT" id="Age-36-p8O"/>
+                        <outlet property="moviesCVHeight" destination="D2u-yR-mcf" id="hYK-0z-Bai"/>
+                        <outlet property="nextMonthMoviesCV" destination="WvE-IF-2uy" id="pkx-Uu-EXY"/>
+                        <outlet property="nextMonthMoviesHeader" destination="hfW-IC-o6c" id="PWb-OU-5tV"/>
                         <outlet property="upcomingMoviesCV" destination="JAU-6P-nvz" id="ZAZ-hd-7bt"/>
                         <outlet property="upcomingMoviesHeader" destination="h1f-cZ-eAz" id="WKH-tA-DUE"/>
                     </connections>
@@ -1430,7 +1443,9 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="congratsView" destination="gwZ-c8-WzD" id="Ye4-Pw-gde"/>
                         <outlet property="dateLabel" destination="UWW-Np-Dh6" id="NP9-4E-IDy"/>
+                        <outlet property="goHomeButton" destination="dcb-DP-bUJ" id="ahA-XA-ggx"/>
                         <outlet property="priceLabel" destination="qqL-Pw-SWt" id="lzs-NH-6aK"/>
                         <outlet property="seatsLabel" destination="1iO-M5-SwL" id="dQP-0U-BWa"/>
                         <outlet property="timeLabel" destination="RR9-yw-yJg" id="je2-by-EZQ"/>
@@ -1468,8 +1483,8 @@
     <resources>
         <image name="Barbie" width="1000" height="1481"/>
         <image name="Screen" width="697" height="80"/>
-        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="calendar" width="100" height="100"/>
+        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="duration" width="100" height="100"/>
         <image name="genre" width="100" height="100"/>
         <image name="rating" width="100" height="100"/>

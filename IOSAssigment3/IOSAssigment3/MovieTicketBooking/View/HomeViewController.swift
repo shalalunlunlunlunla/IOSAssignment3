@@ -10,13 +10,16 @@ import UIKit
 final class HomeViewController: UIViewController {
   // MARK: - Outlets
   
-  @IBOutlet weak private var moviesHeader: MovieSlideHeader!
   @IBOutlet weak private var moviesCV: UICollectionView!
-  @IBOutlet weak private var upcomingMoviesHeader: MovieSlideHeader!
+    @IBOutlet weak var moviesCVHeight: NSLayoutConstraint!
+    @IBOutlet weak private var upcomingMoviesHeader: MovieSlideHeader!
   @IBOutlet weak private var upcomingMoviesCV: UICollectionView!
-  
+    @IBOutlet weak var nextMonthMoviesHeader: MovieSlideHeader!
+    @IBOutlet weak var nextMonthMoviesCV: UICollectionView!
+    
   // MARK: - Variables
   
+  private var bannerMovies: [Movie] = []
   private var movies: [Movie] = []
   private var upcomingMovies: [Movie] = []
   
@@ -24,6 +27,7 @@ final class HomeViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    loadBannerMovies()
     loadMovies()
     loadUpcomingMovies()
     setupCollectionViews()
@@ -40,6 +44,48 @@ final class HomeViewController: UIViewController {
   }
   
   // MARK: - Functions
+    
+    private func loadBannerMovies() {
+        bannerMovies = [
+            Movie(
+                image: "PulpFiction",
+                title: "Pulp Fiction",
+                filmReview: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+                screeningDates: Movie.screeningDatesForPulpFiction(),
+                duration: 154,
+                genres: [Genre.Crime, Genre.Drama],
+                contentRating: ContentRating.R,
+                director: "Quentin Tarantino",
+                cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
+                star: 4
+            ),
+            Movie(
+                image: "TheGodFather",
+                title: "The God Father",
+                filmReview: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                screeningDates: Movie.screeningDatesForTheGodFather(),
+                duration: 175,
+                genres: [Genre.Crime, Genre.Drama],
+                contentRating: ContentRating.R,
+                director: "Francis Ford Coppola",
+                cast: ["Marlon Brando", "Al Pacino", "James Caan"],
+                star: 3
+            ),
+            Movie(
+                image: "BackToTheFuture",
+                title: "Back To The Future",
+                filmReview: "Marty McFly, a 17-year-old high school student, is accidentally sent 30 years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.",
+                screeningDates: Movie.screeningDatesForBackToTheFuture(),
+                duration: 116,
+                genres: [Genre.Fantasy, Genre.Action],
+                contentRating: ContentRating.PG,
+                director: "Robert Zemeckis",
+                cast: ["Michael J. Fox", "Michael J. Fox", "Lea Thompson"],
+                star: 3
+            )
+        ]
+    }
+    
   // รายละเอียดหนังเดือน May
     private func loadMovies() {
         movies = [
@@ -148,13 +194,27 @@ final class HomeViewController: UIViewController {
       }
   
   private func setupCollectionViews() {
-    moviesCV.setup("MoviePosterCVC", MoviePostersLayout())
-    upcomingMoviesCV.setup("UpcomingMoviePosterCVC", MoviePostersLayout(bottomHeight: 35, imageAspectRatio: 1))
+      let width = UIScreen.main.bounds.width
+      let height = width * (3/5)
+      
+      //banner
+      moviesCVHeight.constant = height
+      let flowLayout = UICollectionViewFlowLayout()
+      flowLayout.itemSize = CGSize(width: width, height: height)
+      flowLayout.scrollDirection = .horizontal
+      flowLayout.minimumInteritemSpacing = 10
+    moviesCV.setup("MoviePosterCVC", flowLayout)
+      //
+      
+      //this month
+    upcomingMoviesCV.setup("UpcomingMoviePosterCVC", MoviePostersLayout(bottomHeight: 0, imageAspectRatio: 3/4))
+      //next month
+      nextMonthMoviesCV.setup("UpcomingMoviePosterCVC", MoviePostersLayout(bottomHeight: 0, imageAspectRatio: 3/4))
   }
   
   private func configureReusableViewHeaders() {
-    moviesHeader.configureView(title: "This Month", onPressed: {self.goToMovies()})
-    upcomingMoviesHeader.configureView(title: "Next Month", onPressed: {self.goToMovies(ShowType.Upcoming)})
+    upcomingMoviesHeader.configureView(title: "This Month", onPressed: {self.goToMovies(ShowType.NowShowing)})
+      nextMonthMoviesHeader.configureView(title: "Next Month", onPressed: {self.goToMovies(ShowType.Upcoming)})
   }
   
   private func goToMovies(_ showType: ShowType = ShowType.NowShowing) {
@@ -167,18 +227,29 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { collectionView == moviesCV ? movies.count : upcomingMovies.count }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        //this month
+        if collectionView == upcomingMoviesCV{
+            return movies.count
+        }else if collectionView == nextMonthMoviesCV{ //next month
+            return upcomingMovies.count
+        }else{ //banner
+            return bannerMovies.count
+        }
+    }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let upcomingMovie: Bool = collectionView == upcomingMoviesCV
-    let movie: Movie = upcomingMovie ? upcomingMovies[indexPath.row] : movies[indexPath.row]
-    if upcomingMovie {
+    if collectionView == upcomingMoviesCV { //this month
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingMoviePosterCVC", for: indexPath) as! UpcomingMoviePosterCVC
-      cell.setupCell(movie)
+      cell.setupCell(movies[indexPath.row])
       return cell
-    } else {
+    }else if collectionView == nextMonthMoviesCV{ //next month
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingMoviePosterCVC", for: indexPath) as! UpcomingMoviePosterCVC
+        cell.setupCell(upcomingMovies[indexPath.row])
+        return cell
+    } else { //banner
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviePosterCVC", for: indexPath) as! MoviePosterCVC
-      cell.setupCell(movie)
+      cell.setupCell(bannerMovies[indexPath.row])
       return cell
     }
   }
