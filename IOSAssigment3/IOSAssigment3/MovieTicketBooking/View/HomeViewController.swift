@@ -10,24 +10,27 @@ import UIKit
 final class HomeViewController: UIViewController {
   // MARK: - Outlets
   
-  @IBOutlet weak private var moviesCV: UICollectionView!
+    @IBOutlet weak private var moviesCV: UICollectionView!
     @IBOutlet weak var moviesCVHeight: NSLayoutConstraint!
     @IBOutlet weak private var upcomingMoviesHeader: MovieSlideHeader!
-  @IBOutlet weak private var upcomingMoviesCV: UICollectionView!
+    @IBOutlet weak private var upcomingMoviesCV: UICollectionView!
     @IBOutlet weak var nextMonthMoviesHeader: MovieSlideHeader!
     @IBOutlet weak var nextMonthMoviesCV: UICollectionView!
     
   // MARK: - Variables
   
-  private var bannerMovies: [Movie] = []
   private var movies: [Movie] = []
   private var upcomingMovies: [Movie] = []
+  private var banner: [Banner] = []
+  private var bannerTimer: Timer?
+  private var currentBannerIndex = 0
+
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    loadBannerMovies()
+    loadBanner()
     loadMovies()
     loadUpcomingMovies()
     setupCollectionViews()
@@ -37,54 +40,27 @@ final class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(false, animated: false)
+    startBannerTimer()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    stopBannerTimer()
+  }
+    
+  deinit {
+    stopBannerTimer()
   }
   
   // MARK: - Functions
     
-    private func loadBannerMovies() {
-        bannerMovies = [
-            Movie(
-                image: "PulpFiction",
-                title: "Pulp Fiction",
-                filmReview: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
-                screeningDates: Movie.screeningDatesForPulpFiction(),
-                duration: 154,
-                genres: [Genre.Crime, Genre.Drama],
-                contentRating: ContentRating.R,
-                director: "Quentin Tarantino",
-                cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
-                star: 4
-            ),
-            Movie(
-                image: "TheGodFather",
-                title: "The God Father",
-                filmReview: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-                screeningDates: Movie.screeningDatesForTheGodFather(),
-                duration: 175,
-                genres: [Genre.Crime, Genre.Drama],
-                contentRating: ContentRating.R,
-                director: "Francis Ford Coppola",
-                cast: ["Marlon Brando", "Al Pacino", "James Caan"],
-                star: 3
-            ),
-            Movie(
-                image: "BackToTheFuture",
-                title: "Back To The Future",
-                filmReview: "Marty McFly, a 17-year-old high school student, is accidentally sent 30 years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.",
-                screeningDates: Movie.screeningDatesForBackToTheFuture(),
-                duration: 116,
-                genres: [Genre.Fantasy, Genre.Action],
-                contentRating: ContentRating.PG,
-                director: "Robert Zemeckis",
-                cast: ["Michael J. Fox", "Michael J. Fox", "Lea Thompson"],
-                star: 3
-            )
-        ]
-    }
+    private func loadBanner() {
+            banner = [
+                Banner(image: "banner1", title: "Movie Trivia Night"),
+                Banner(image: "banner2", title: "Short Film Night"),
+                Banner(image: "banner3", title: "Movie Night: All That Jazz")
+            ]
+        }
     
   // รายละเอียดหนังเดือน May
     private func loadMovies() {
@@ -98,20 +74,18 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Crime, Genre.Drama],
             contentRating: ContentRating.R,
             director: "Quentin Tarantino",
-            cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
-            star: 4
+            cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"]
           ),
           Movie(
-            image: "TheGodFather",
-            title: "The God Father",
+            image: "TheGodfather",
+            title: "The Godfather",
             filmReview: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-            screeningDates: Movie.screeningDatesForTheGodFather(),
+            screeningDates: Movie.screeningDatesForTheGodfather(),
             duration: 175,
             genres: [Genre.Crime, Genre.Drama],
             contentRating: ContentRating.R,
             director: "Francis Ford Coppola",
-            cast: ["Marlon Brando", "Al Pacino", "James Caan"],
-            star: 3
+            cast: ["Marlon Brando", "Al Pacino", "James Caan"]
           ),
           Movie(
             image: "BackToTheFuture",
@@ -122,8 +96,7 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Fantasy, Genre.Action],
             contentRating: ContentRating.PG,
             director: "Robert Zemeckis",
-            cast: ["Michael J. Fox", "Michael J. Fox", "Lea Thompson"],
-            star: 3
+            cast: ["Michael J. Fox", "Michael J. Fox", "Lea Thompson"]
           ),
           Movie(
             image: "KillBill",
@@ -134,8 +107,7 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Crime, Genre.Action, Genre.Thriller],
             contentRating: ContentRating.R,
             director: "Quentin Tarantino",
-            cast: ["Uma Thurman", "Uma Thurman", "Daryl Hannah"],
-            star: 3
+            cast: ["Uma Thurman", "Uma Thurman", "Daryl Hannah"]
           ),
         ]
       }
@@ -151,8 +123,7 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Horror, Genre.Thriller],
             contentRating: ContentRating.R,
             director: "Steven Spielberg",
-            cast: ["Roy Scheider", "Robert Shaw", "Richard Dreyfuss"],
-            star: 3
+            cast: ["Roy Scheider", "Robert Shaw", "Richard Dreyfuss"]
           ),
           Movie(
             image: "ForrestGump",
@@ -163,8 +134,7 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Drama, Genre.Romance],
             contentRating: ContentRating.R,
             director: "Robert Zemeckis",
-            cast: ["Tom Hanks", "Robin Wright", "Gary Sinise"],
-            star: 4
+            cast: ["Tom Hanks", "Robin Wright", "Gary Sinise"]
           ),
           Movie(
             image: "ShawShankRedemption",
@@ -175,8 +145,7 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Drama],
             contentRating: ContentRating.R,
             director: "Frank Darabont",
-            cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
-            star: 4
+            cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"]
           ),
           Movie(
             image: "TheMatrix",
@@ -187,8 +156,7 @@ final class HomeViewController: UIViewController {
             genres: [Genre.Action, Genre.SciFi],
             contentRating: ContentRating.R,
             director: "Lana Wachowski, Lilly Wachowski",
-            cast: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-            star: 4
+            cast: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
           ),
         ]
       }
@@ -224,40 +192,62 @@ final class HomeViewController: UIViewController {
     moviesVC.upcomingMovies = upcomingMovies
     navigationController?.pushViewController(moviesVC, animated: true)
   }
+    private func startBannerTimer() {
+        bannerTimer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(scrollToNextBanner), userInfo: nil, repeats: true)
+    }
+
+    private func stopBannerTimer() {
+        bannerTimer?.invalidate()
+        bannerTimer = nil
+    }
+
+    @objc private func scrollToNextBanner() {
+        guard !banner.isEmpty else { return }
+        currentBannerIndex = (currentBannerIndex + 1) % banner.count
+        let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+        moviesCV.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+      }
 }
 
+
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        //this month
-        if collectionView == upcomingMoviesCV{
-            return movies.count
-        }else if collectionView == nextMonthMoviesCV{ //next month
-            return upcomingMovies.count
-        }else{ //banner
-            return bannerMovies.count
-        }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      switch collectionView {
+      case upcomingMoviesCV:
+        return movies.count
+      case nextMonthMoviesCV:
+        return upcomingMovies.count
+      default:
+        return banner.count
+      }
     }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if collectionView == upcomingMoviesCV { //this month
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingMoviePosterCVC", for: indexPath) as! UpcomingMoviePosterCVC
-      cell.setupCell(movies[indexPath.row])
-      return cell
-    }else if collectionView == nextMonthMoviesCV{ //next month
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingMoviePosterCVC", for: indexPath) as! UpcomingMoviePosterCVC
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      switch collectionView {
+      case upcomingMoviesCV:
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingMoviePosterCVC", for: indexPath) as? UpcomingMoviePosterCVC else { return UICollectionViewCell() }
+        cell.setupCell(movies[indexPath.row])
+        return cell
+      case nextMonthMoviesCV:
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingMoviePosterCVC", for: indexPath) as? UpcomingMoviePosterCVC else { return UICollectionViewCell() }
         cell.setupCell(upcomingMovies[indexPath.row])
         return cell
-    } else { //banner
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviePosterCVC", for: indexPath) as! MoviePosterCVC
-      cell.setupCell(bannerMovies[indexPath.row])
-      return cell
+      default:
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviePosterCVC", for: indexPath) as? MoviePosterCVC else { return UICollectionViewCell() }
+        cell.setupCell(with: banner[indexPath.row])
+        return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == upcomingMoviesCV {
+          let movieDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieDetailVC") as! MovieDetailViewController
+          movieDetailVC.movie = movies[indexPath.row]
+          navigationController?.pushViewController(movieDetailVC, animated: true)
+        } else if collectionView == nextMonthMoviesCV {
+          let movieDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieDetailVC") as! MovieDetailViewController
+          movieDetailVC.movie = upcomingMovies[indexPath.row]
+          navigationController?.pushViewController(movieDetailVC, animated: true)
+        }
     }
   }
-  
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let movie = collectionView == moviesCV ? movies[indexPath.row] : upcomingMovies[indexPath.row]
-    let movieDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieDetailVC") as! MovieDetailViewController
-    movieDetailVC.movie = movie
-    navigationController?.pushViewController(movieDetailVC, animated: true)
-  }
-}

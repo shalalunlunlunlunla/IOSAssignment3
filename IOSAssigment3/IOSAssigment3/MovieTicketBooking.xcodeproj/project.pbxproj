@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A33994502BEC880C00D11323 /* neww.swift in Sources */ = {isa = PBXBuildFile; fileRef = A339944F2BEC880C00D11323 /* neww.swift */; };
 		B668666D2BE4DC440055D63A /* MyTicketTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668666C2BE4DC440055D63A /* MyTicketTableViewController.swift */; };
 		B668666F2BE4FABC0055D63A /* MyTicketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668666E2BE4FABC0055D63A /* MyTicketTableViewCell.swift */; };
 		CE499BAB2AB4D146004F3F9C /* MovieSlideHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BAA2AB4D146004F3F9C /* MovieSlideHeader.swift */; };
@@ -54,7 +53,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A339944F2BEC880C00D11323 /* neww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = neww.swift; sourceTree = "<group>"; };
 		B668666C2BE4DC440055D63A /* MyTicketTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketTableViewController.swift; sourceTree = "<group>"; };
 		B668666E2BE4FABC0055D63A /* MyTicketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketTableViewCell.swift; sourceTree = "<group>"; };
 		CE499BAA2AB4D146004F3F9C /* MovieSlideHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSlideHeader.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 				CE64EC282AA78BCD002FED5F /* Seat.swift */,
 				CE6CA6292AAC73B90008C58D /* Session.swift */,
 				CE6CA62E2AAF023F0008C58D /* Ticket.swift */,
-				A339944F2BEC880C00D11323 /* neww.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,7 +304,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					CE57E40B2AA225DF006A822F = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -363,7 +360,6 @@
 				CE64EC292AA78BCD002FED5F /* Seat.swift in Sources */,
 				CE64EC0E2AA48F2A002FED5F /* MovieCVC.swift in Sources */,
 				CE64EC112AA4AE8F002FED5F /* MoviesFlowLayout.swift in Sources */,
-				A33994502BEC880C00D11323 /* neww.swift in Sources */,
 				CE6CA63B2AAF51E90008C58D /* Extension+UIViewController.swift in Sources */,
 				B668666F2BE4FABC0055D63A /* MyTicketTableViewCell.swift in Sources */,
 				CE64EC272AA72C29002FED5F /* SeatsViewController.swift in Sources */,
@@ -452,6 +448,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -469,7 +466,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -512,6 +509,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

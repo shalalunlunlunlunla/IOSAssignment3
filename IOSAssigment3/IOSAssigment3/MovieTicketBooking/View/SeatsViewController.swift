@@ -48,12 +48,12 @@ final class SeatsViewController: UIViewController {
         }
     }
     
-    private func selectedSeats() -> [Seat] { seats.filter({ $0.selected }) }
+    private func selectedSeats() -> [Seat] { seats.filter { $0.selected } }
     
     private func selectedSeatsCount() -> Int { selectedSeats().count }
     
     private func selectedSeatsCodes() -> String {
-        let selectedSeatCodes = selectedSeats().map({seat in seat.seatCode })
+        let selectedSeatCodes = selectedSeats().map { seat in seat.seatCode }
         return selectedSeatCodes.joined(separator: ", ")
     }
     
