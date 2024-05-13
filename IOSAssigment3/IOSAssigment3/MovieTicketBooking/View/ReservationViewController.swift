@@ -55,8 +55,8 @@ final class ReservationViewController: UIViewController {
         switch movie.title {
         case "Pulp Fiction":
             screeningDates = Movie.screeningDatesForPulpFiction()
-        case "The God Father":
-            screeningDates = Movie.screeningDatesForTheGodFather()
+        case "The Godfather":
+            screeningDates = Movie.screeningDatesForTheGodfather()
         case "Back To The Future":
             screeningDates = Movie.screeningDatesForBackToTheFuture()
         case "Kill Bill":

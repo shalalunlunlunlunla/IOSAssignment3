@@ -28,6 +28,11 @@ enum ContentRating: String, Codable {
 }
 //อันนี้มีแก้
 
+struct Banner {
+    var image: String
+    var title: String
+}
+
 struct Movie: Codable {
   var imageName: String
   var title: String
@@ -38,7 +43,6 @@ struct Movie: Codable {
   var contentRating: ContentRating
   var director: String
   var cast: [String]
-  var star: Int
     //อันนี้มีแก้
 
   init(
@@ -50,8 +54,7 @@ struct Movie: Codable {
     genres: [Genre],
     contentRating: ContentRating,
     director: String,
-    cast: [String],
-    star: Int
+    cast: [String]
   ) {
       //อันนี้มีแก้
 
@@ -65,7 +68,6 @@ struct Movie: Codable {
     self.contentRating = contentRating
     self.director = director
     self.cast = cast
-    self.star = star
   }
     //อันนี้มีแก้
 
@@ -140,7 +142,7 @@ extension Movie {
         return dateFromString("07/05/2024")
     }
 
-    static func screeningDatesForTheGodFather() -> [Date] {
+    static func screeningDatesForTheGodfather() -> [Date] {
         return dateFromString("14/05/2024")
     }
 
